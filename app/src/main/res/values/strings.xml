@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RocketlauncherS</string>
     <string name="btnSingle">Single</string>
+    <string name="btnMulti">Multi</string>
     <string name="btnSlot1">Slot 1</string>
     <string name="btnSlot2">Slot 2</string>
     <string name="btnSlot3">Slot 3</string>
