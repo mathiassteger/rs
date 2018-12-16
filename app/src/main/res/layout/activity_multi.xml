@@ -78,5 +78,11 @@
                 android:entries="@array/seconds_array"
                 android:background="#99d9d9d9"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/@btnGo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnGo" />
     </LinearLayout>
 </ScrollView>
