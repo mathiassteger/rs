@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RocketlauncherS</string>
+    <string name="btnSingle">Single</string>
+    <string name="btnSlot1">Slot 1</string>
+    <string name="btnSlot2">Slot 2</string>
+    <string name="btnSlot3">Slot 3</string>
+    <string name="btnSlot4">Slot 4</string>
+    <string name="btnSlot5">Slot 5</string>
+    <string name="btnSlot6">Slot 6</string>
+    <string name="btnSlot7">Slot 7</string>
+    <string name="btnSlot8">Slot 8</string>
+    <string name="btnSlot9">Slot 9</string>
+    <string name="btnSlot10">Slot 10</string>
+</resources>
