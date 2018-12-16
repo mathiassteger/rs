@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMulti(View view) {
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        Intent intent = new Intent(MainActivity.this, MultiActivity.class);
         startActivity(intent);
     }
 }
