@@ -1,5 +1,6 @@
 package com.rocketlauncher.mscsdr.rs;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -10,138 +11,151 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.UUID;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+    public TextView mTitle;
+    private String mConnectedDeviceName = null;
+    private BluetoothAdapter mBluetoothAdapter = null;
+    private static BluetoothSerialService mSerialService = null;
+    private boolean mLocalEcho = false;
     private BluetoothDevice mmDevice;
-    private BluetoothAdapter mBluetoothAdapter;
-    private SendReceive sendReceive;
+    public static final String LOG_TAG = "ROCKETS";
 
-    static final int STATE_LISTENING = 1;
-    static final int STATE_CONNECTING = 2;
-    static final int STATE_CONNECTED = 3;
-    static final int STATE_CONNECTION_FAILED = 4;
-    static final int STATE_MESSAGE_RECEIVED = 5;
+    public static final int MESSAGE_STATE_CHANGE = 1;
+    public static final int MESSAGE_READ = 2;
+    public static final int MESSAGE_WRITE = 3;
+    public static final int MESSAGE_DEVICE_NAME = 4;
+    public static final int MESSAGE_TOAST = 5;
 
-    int REQUEST_ENABLE_BLUETOOTH = 1;
+    private int mOutgoingEoL_0D = 0x0D;
+    private int mOutgoingEoL_0A = 0x0A;
+
+    // Key names received from the BluetoothChatService Handler
+    public static final String DEVICE_NAME = "device_name";
+    public static final String TOAST = "toast";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mTitle = findViewById(R.id.txtTitle);
+        mTitle.setText(R.string.app_name);
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        for (BluetoothDevice d : this.mBluetoothAdapter.getBondedDevices())
-            if (d.getName().equals("Irrelev4nt"))
-                this.mmDevice = d;
-
-        ClientClass clientClass = new ClientClass(mmDevice);
-        clientClass.start();
     }
 
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
+    private byte[] handleEndOfLineChars(int outgoingEoL) {
+        byte[] out;
 
-                default:
-                    Log.e("error", "Handler: " + msg.what);
-            }
-            return true;
-        }
-    });
-
-    public void onSingle(View view) {
-        String string = "Hello!";
-        sendReceive.write(string.getBytes());
-        Intent intent = new Intent(MainActivity.this, SingleActivity.class);
-        startActivity(intent);
-    }
-
-    public void onMulti(View view) {
-        Intent intent = new Intent(MainActivity.this, MultiActivity.class);
-        startActivity(intent);
-    }
-
-    private class ClientClass extends Thread {
-        private BluetoothDevice device;
-        private BluetoothSocket socket;
-
-        public ClientClass(BluetoothDevice device) {
-            this.device = device;
-            try {
-                this.socket = this.device.createRfcommSocketToServiceRecord(MY_UUID);
-                Log.e("error", "" + socket);
-
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (outgoingEoL == 0x0D0A) {
+            out = new byte[2];
+            out[0] = 0x0D;
+            out[1] = 0x0A;
+        } else {
+            if (outgoingEoL == 0x00) {
+                out = new byte[0];
+            } else {
+                out = new byte[1];
+                out[0] = (byte) outgoingEoL;
             }
         }
 
-        public void run() {
-            try {
-                socket.connect();
-                Message msg = Message.obtain();
-                msg.what = STATE_CONNECTED;
-                handler.sendMessage(msg);
-                sendReceive = new SendReceive(socket);
-                sendReceive.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Message msg = Message.obtain();
-                msg.what = STATE_CONNECTION_FAILED;
-                handler.sendMessage(msg);
-            }
-        }
+        return out;
     }
 
-    private class SendReceive extends Thread {
-        private final BluetoothSocket bluetoothSocket;
-        private final InputStream is;
-        private final OutputStream os;
+    public void send(byte[] out) {
 
-        public SendReceive(BluetoothSocket socket) {
-            bluetoothSocket = socket;
-            OutputStream tempOut = null;
-            InputStream tempIn = null;
-            try {
-                tempOut = bluetoothSocket.getOutputStream();
-                tempIn = bluetoothSocket.getInputStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            os = tempOut;
-            is = tempIn;
-        }
+        if (out.length == 1) {
 
-        public void run() {
-            byte[] buffer = new byte[1024];
-            int bytes;
-            Log.e("error", "Starting WhileLoop");
-            while (true) {
-                try {
-                    bytes = is.read(buffer);
-                    handler.obtainMessage(STATE_MESSAGE_RECEIVED, bytes, -1,buffer).sendToTarget();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (out[0] == 0x0D) {
+                out = handleEndOfLineChars(mOutgoingEoL_0D);
+            } else {
+                if (out[0] == 0x0A) {
+                    out = handleEndOfLineChars(mOutgoingEoL_0A);
                 }
             }
         }
 
-        public void write(byte[] bytes) {
-            try {
-                Log.e("error", "Writing...");
-                os.write(bytes);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (out.length > 0) {
+            mSerialService.write(out);
+        }
+    }
+
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandlerBT = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGE_STATE_CHANGE:
+                    if (true) Log.i(LOG_TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
+                    switch (msg.arg1) {
+                        case BluetoothSerialService.STATE_CONNECTED:
+
+                            mTitle.setText("Connected to");
+                            mTitle.append(" " + mConnectedDeviceName);
+                            break;
+
+                        case BluetoothSerialService.STATE_CONNECTING:
+                            mTitle.setText("Connecting...");
+                            break;
+
+                        case BluetoothSerialService.STATE_LISTEN:
+                        case BluetoothSerialService.STATE_NONE:
+                            mTitle.setText("Not connected");
+
+                            break;
+                    }
+                    break;
+                case MESSAGE_WRITE:
+                    if (mLocalEcho) {
+                        byte[] writeBuf = (byte[]) msg.obj;
+                    }
+
+                    break;
+/*
+            case MESSAGE_READ:
+                byte[] readBuf = (byte[]) msg.obj;
+                mEmulatorView.write(readBuf, msg.arg1);
+
+                break;
+*/
+                case MESSAGE_DEVICE_NAME:
+                    // save the connected device's name
+                    mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);
+                    Toast.makeText(getApplicationContext(), "Connected to" + " "
+                            + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                    break;
+                case MESSAGE_TOAST:
+                    Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
+    };
 
+
+    public void onSingle(View view) {
+        for (BluetoothDevice d : mBluetoothAdapter.getBondedDevices())
+            if (d.getName().equals("Irrelev4nt"))
+                mmDevice = d;
+
+        //this.mConnectedDeviceName = mmDevice.getName();
+        mSerialService = new BluetoothSerialService(this, mHandlerBT);
+        mSerialService.connect(mmDevice);
+        mSerialService.start();
+
+//        Intent intent = new Intent(MainActivity.this, SingleActivity.class);
+//        startActivity(intent);
+    }
+
+    public void onMulti(View view) {
+        send("Hallo".getBytes());
+//        Intent intent = new Intent(MainActivity.this, MultiActivity.class);
+//        startActivity(intent);
     }
 }

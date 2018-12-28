@@ -2,6 +2,7 @@ package com.rocketlauncher.mscsdr.rs;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class SingleActivity extends AppCompatActivity {
 
@@ -9,5 +10,8 @@ public class SingleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
+    }
+
+    public void on1(View view){
     }
 }
