@@ -140,14 +140,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onSingle(View view) {
+        if (mSerialService != null) {
+            Log.i(LOG_TAG, "Resetting mSerialService");
+            mSerialService.stop();
+            mSerialService = null;
+        }
         for (BluetoothDevice d : mBluetoothAdapter.getBondedDevices())
             if (d.getName().equals("Irrelev4nt"))
                 mmDevice = d;
 
         //this.mConnectedDeviceName = mmDevice.getName();
         mSerialService = new BluetoothSerialService(this, mHandlerBT);
-        mSerialService.connect(mmDevice);
-        mSerialService.start();
+        mSerialService.connect(mmDevice); // DAS HIER MUSS
+        mSerialService.start();           // VOR DAS HIER!!! 
 
 //        Intent intent = new Intent(MainActivity.this, SingleActivity.class);
 //        startActivity(intent);

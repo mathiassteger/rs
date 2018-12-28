@@ -300,6 +300,7 @@ public class BluetoothSerialService {
                 else
                     Log.i(TAG, "Device:" + mmDevice.getName());
 
+
                 mmSocket.connect();
             } catch (IOException e) {
                 Log.e(TAG, "Unable to connect: ", e);
