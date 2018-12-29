@@ -1,5 +1,9 @@
 package com.rocketlauncher.mscsdr.rs.PropertyChanges;
 
+import android.util.Log;
+
+import com.rocketlauncher.mscsdr.rs.Model;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -13,20 +17,19 @@ public class RadioString {
     private final PropertyChangeSupport valuePCS = new PropertyChangeSupport(this);
 
     public synchronized void setValue(String value) {
-        String oldValue = value;
         this.value = value;
-        valuePCS.firePropertyChange("value", oldValue, value);
+        valuePCS.firePropertyChange("value", null, value);
     }
 
     public synchronized String getValue() {
         return value;
     }
 
-    public void subscribeToValue(PropertyChangeListener l){
+    public void subscribeToValue(PropertyChangeListener l) {
         valuePCS.addPropertyChangeListener(l);
     }
 
-    public void unsubcribeFromValue(PropertyChangeListener l){
+    public void unsubcribeFromValue(PropertyChangeListener l) { // CHECK IF THIS WORKS LATER 4Head
         valuePCS.removePropertyChangeListener(l);
     }
 }

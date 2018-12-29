@@ -87,7 +87,7 @@ public class Model {
                     if (true) Log.i(LOG_TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
                     switch (msg.arg1) {
                         case BluetoothSerialService.STATE_CONNECTED:
-                            titleText.setValue("Connected to" + mConnectedDeviceName);
+                            titleText.setValue("Connected to " + mConnectedDeviceName);
                             break;
 
                         case BluetoothSerialService.STATE_CONNECTING:
@@ -96,7 +96,7 @@ public class Model {
 
                         case BluetoothSerialService.STATE_LISTEN:
                         case BluetoothSerialService.STATE_NONE:
-                            titleText.setValue("Not connected");
+                            titleText.setValue("Not connected!");
                             break;
                     }
                     break;
