@@ -54,8 +54,6 @@ public class BluetoothSerialService {
 
     private boolean mAllowInsecureConnections;
 
-    private Context mContext;
-
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
     public static final int STATE_LISTEN = 1;     // now listening for incoming connections
@@ -65,14 +63,12 @@ public class BluetoothSerialService {
     /**
      * Constructor. Prepares a new BluetoothChat session.
      *
-     * @param context The UI Activity Context
      * @param handler A Handler to send messages back to the UI Activity
      */
-    public BluetoothSerialService(Context context, Handler handler) {
+    public BluetoothSerialService(Handler handler) {
         mAdapter = BluetoothAdapter.getDefaultAdapter();
         mState = STATE_NONE;
         mHandler = handler;
-        mContext = context;
         mAllowInsecureConnections = true;
     }
 
