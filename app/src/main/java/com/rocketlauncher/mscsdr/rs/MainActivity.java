@@ -151,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
 
         //this.mConnectedDeviceName = mmDevice.getName();
         mSerialService = new BluetoothSerialService(this, mHandlerBT);
-        mSerialService.connect(mmDevice); // DAS HIER MUSS
-        mSerialService.start();           // VOR DAS HIER!!! 
+        mSerialService.start();           // DAS HIER MUSS
+        mSerialService.connect(mmDevice); // VOR DAS HIER!!!! SONST IST DER SOCKET ZU
 
 //        Intent intent = new Intent(MainActivity.this, SingleActivity.class);
 //        startActivity(intent);
