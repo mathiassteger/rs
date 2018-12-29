@@ -82,7 +82,7 @@ public class BluetoothSerialService {
         mState = state;
 
         // Give the new state to the Handler so the UI Activity can update
-        mHandler.obtainMessage(MainActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
+        mHandler.obtainMessage(Model.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
     }
 
     /**
@@ -168,9 +168,9 @@ public class BluetoothSerialService {
         mConnectedThread.start();
 
         // Send the name of the connected device back to the UI Activity
-        Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_DEVICE_NAME);
+        Message msg = mHandler.obtainMessage(Model.MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivity.DEVICE_NAME, device.getName());
+        bundle.putString(Model.DEVICE_NAME, device.getName());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
@@ -222,9 +222,9 @@ public class BluetoothSerialService {
         setState(STATE_NONE);
 
         // Send a failure message back to the Activity
-        Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(Model.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivity.TOAST, "Unable to connect");
+        bundle.putString(Model.TOAST, "Unable to connect");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
         Log.i(TAG, "Connection failed..");
@@ -237,9 +237,9 @@ public class BluetoothSerialService {
         setState(STATE_NONE);
 
         // Send a failure message back to the Activity
-        Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(Model.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivity.TOAST, "Connection lost");
+        bundle.putString(Model.TOAST, "Connection lost");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
@@ -390,7 +390,7 @@ public class BluetoothSerialService {
                 mmOutStream.write(buffer);
 
                 // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, buffer.length, -1, buffer)
+                mHandler.obtainMessage(Model.MESSAGE_WRITE, buffer.length, -1, buffer)
                         .sendToTarget();
             } catch (IOException e) {
                 Log.e(TAG, "Exception during write", e);

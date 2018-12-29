@@ -63,7 +63,6 @@ public class Model {
     public void send(byte[] out) {
 
         if (out.length == 1) {
-
             if (out[0] == 0x0D) {
                 out = handleEndOfLineChars(mOutgoingEoL_0D);
             } else {
