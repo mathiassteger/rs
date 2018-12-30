@@ -57,4 +57,5 @@ if __name__ == "__main__":
   init(q)
  except KeyboardInterrupt:
   print "Keyboard Interrupt, ending Process"
+  #TODO: release all Pins
   os._exit(0)
