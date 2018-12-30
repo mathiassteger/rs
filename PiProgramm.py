@@ -11,6 +11,11 @@ port = 1
 server_socket.bind(("",port))
 server_socket.listen(1)
 
+def pin(pinNumber): #Thread to start rocket with pin number (call with "Thread(target=pin, args=($pinNmbr$,)).start()")
+ print "setting pin: ", pinNumber #TODO: implement function
+ time.sleep(1) #sleep for number of seconds the pin should be on
+ print "setting pin off: ", pinNumber #TODO: implement function
+
 def worker(q): #Consumer Thread
  while 1:
   print "worker running"
