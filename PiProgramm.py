@@ -11,7 +11,8 @@ port = 1
 server_socket.bind(("",port))
 server_socket.listen(1)
 
-def pin(pinNumber): #Thread to start rocket with pin number (call with "Thread(target=pin, args=($pinNmbr$,)).start()")
+def pin(pinNumber, delay): #Thread to start rocket with pin number (call with "Thread(target=pin, args=($pinNmbr$,$delay$,)).start()")
+ time.sleep(delay)
  print "setting pin: ", pinNumber #TODO: implement function
  time.sleep(1) #sleep for number of seconds the pin should be on
  print "setting pin off: ", pinNumber #TODO: implement function
@@ -21,7 +22,6 @@ def worker(q): #Consumer Thread
   print "worker running"
   if(not q.empty()):
    print "Consumer consumed: ", q.get()
-  time.sleep(5) #sleep for five seconds
 
 def init(q): #Producer (main) Thread
  print "initiating Bluetooth socket"
@@ -58,4 +58,3 @@ if __name__ == "__main__":
  except KeyboardInterrupt:
   print "Keyboard Interrupt, ending Process"
   os._exit(0)
-  
