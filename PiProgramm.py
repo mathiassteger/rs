@@ -3,6 +3,7 @@ from Queue import Queue
 from threading import Thread
 import time
 import os
+import json
 
 server_socket=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 
@@ -26,6 +27,10 @@ def init(q): #Producer (main) Thread
 
    data = client_socket.recv(1024)
    print "Received: %s" % data
+   try:
+    data = json.loads(data)
+   except ValueError:
+    print "Recevied Data not in json format"
    q.put(data)
    if data == "q":
     print ("Quit")
