@@ -51,7 +51,7 @@ def init(q): #Producer (main) Thread
    try:
     data = json.loads(data)
     for p in data["pins"]:
-      pin(data["delay"], data[p])
+      Thread(target=pin, args=(p,data["delay"],)).start()
    except ValueError:
     print "Recevied Data not in json format"
    q.put(data)
