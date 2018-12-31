@@ -68,6 +68,7 @@ def init(q): #Producer (main) Thread
 
 if __name__ == "__main__":
  try:
+  initPins()
   q = Queue()
   worker = Thread(target=worker, args=(q,))
   worker.setDaemon(True)
