@@ -4,6 +4,7 @@ from threading import Thread
 import time
 import os
 import json
+import RPi.GPIO as GPIO
 
 server_socket=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 
@@ -11,11 +12,26 @@ port = 1
 server_socket.bind(("",port))
 server_socket.listen(1)
 
+def initPins():
+  GPIO.setmode(GPIO.BOARD) # Access GPIO pins by pin number not GPIO number
+  GPOI.setup(8, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(10, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(12, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(14, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(16, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(18, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(22, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(24, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(26, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(28, GPIO.OUT) # Set GPIO pin to output
+  GPOI.setup(32, GPIO.OUT) # Set GPIO pin to output
+
 def pin(pinNumber, delay): #Thread to start rocket with pin number (call with "Thread(target=pin, args=($pinNmbr$,$delay$,)).start()")
  time.sleep(delay)
- print "setting pin: ", pinNumber #TODO: implement function
+ GPIO.output(pinNumber, 1) # HIGH
  time.sleep(1) #sleep for number of seconds the pin should be on
- print "setting pin off: ", pinNumber #TODO: implement function
+ GPIO.output(pinNumber, 0) # HIGH
+ #TODO: release pin
 
 def worker(q): #Consumer Thread
  while 1:
@@ -34,6 +50,8 @@ def init(q): #Producer (main) Thread
    print "Received: %s" % data
    try:
     data = json.loads(data)
+    for p in data["pins"]:
+      pin(data["delay"], data[p])
    except ValueError:
     print "Recevied Data not in json format"
    q.put(data)
