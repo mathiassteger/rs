@@ -25,12 +25,23 @@ def initPins():
   GPOI.setup(26, GPIO.OUT) # Set GPIO pin to output
   GPOI.setup(28, GPIO.OUT) # Set GPIO pin to output
   GPOI.setup(32, GPIO.OUT) # Set GPIO pin to output
+  GPIO.output(8, 1)
+  GPIO.output(10, 1)
+  GPIO.output(12, 1)
+  GPIO.output(14, 1)
+  GPIO.output(16, 1)
+  GPIO.output(18, 1)
+  GPIO.output(22, 1)
+  GPIO.output(24, 1)
+  GPIO.output(26, 1)
+  GPIO.output(28, 1)
+  GPIO.output(32, 1)
 
 def pin(pinNumber, delay): #Thread to start rocket with pin number (call with "Thread(target=pin, args=($pinNmbr$,$delay$,)).start()")
  time.sleep(delay)
- GPIO.output(pinNumber, 1) # HIGH
- time.sleep(1) #sleep for number of seconds the pin should be on
  GPIO.output(pinNumber, 0) # HIGH
+ time.sleep(1) #sleep for number of seconds the pin should be on
+ GPIO.output(pinNumber, 1) # HIGH
  #TODO: release pin
 
 def worker(q): #Consumer Thread
