@@ -5,24 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/image"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:text="Test"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onConnect"
+            android:text="Connect" />
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnSingle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:backgroundTint="#99d9d9d9"
         android:onClick="onSingle"
         android:text="@string/btnSingle"
-        android:backgroundTint="#99d9d9d9"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnMulti"
@@ -32,5 +44,5 @@
         android:backgroundTint="#99d9d9d9"
         android:onClick="onMulti"
         android:text="@string/btnMulti"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 </LinearLayout>

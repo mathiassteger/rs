@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/image"
     android:orientation="vertical"
-    tools:context=".SingleActivity"
-    android:background="@drawable/image">
+    tools:context=".SingleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,17 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="#99d9d9d9"
             android:onClick="on1"
-            android:text="@string/btnSlot1"
-            android:backgroundTint="#99d9d9d9"/>
+            android:text="@string/btnSlot1" />
 
         <Button
             android:id="@+id/btnSlot2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot2"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on2"
+            android:text="@string/btnSlot2" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,16 +44,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot3"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on3"
+            android:text="@string/btnSlot3" />
 
         <Button
             android:id="@+id/btnSlot4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot4"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on4"
+            android:text="@string/btnSlot4" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,16 +69,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot5"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on5"
+            android:text="@string/btnSlot5" />
 
         <Button
             android:id="@+id/btnSlot6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot6"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on6"
+            android:text="@string/btnSlot6" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,16 +94,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot7"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on7"
+            android:text="@string/btnSlot7" />
 
         <Button
             android:id="@+id/btnSlot8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/btnSlot8"
-            android:backgroundTint="#99d9d9d9"/>
+            android:layout_weight="8"
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on8"
+            android:text="@string/btnSlot8" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,15 +119,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot9"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on9"
+            android:text="@string/btnSlot9" />
 
         <Button
             android:id="@+id/btnSlot10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/btnSlot10"
-            android:backgroundTint="#99d9d9d9"/>
+            android:backgroundTint="#99d9d9d9"
+            android:onClick="on10"
+            android:text="@string/btnSlot10" />
     </LinearLayout>
 </LinearLayout>

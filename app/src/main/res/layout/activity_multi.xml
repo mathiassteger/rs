@@ -18,20 +18,20 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinner"
+            <TextView
+                android:id="@+id/tvRocket1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:entries="@array/rockets_array"
+                android:text="Slot 1"
                 android:background="#99d9d9d9"/>
 
-            <Spinner
-                android:id="@+id/spinner2"
+            <EditText
+                android:id="@+id/etValue1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:entries="@array/seconds_array"
+                android:text="-1"
                 android:background="#99d9d9d9"/>
         </LinearLayout>
 
@@ -40,20 +40,20 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinner3"
+            <TextView
+                android:id="@+id/tvRocket2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:entries="@array/rockets_array"
+                android:text="Slot 2"
                 android:background="#99d9d9d9"/>
 
-            <Spinner
-                android:id="@+id/spinner4"
+            <EditText
+                android:id="@+id/etValue2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:entries="@array/seconds_array"
+                android:text="-1"
                 android:background="#99d9d9d9"/>
         </LinearLayout>
 
@@ -62,25 +62,179 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinner5"
+            <TextView
+                android:id="@+id/tvRocket3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:entries="@array/rockets_array"
+                android:text="Slot 3"
                 android:background="#99d9d9d9"/>
 
-            <Spinner
-                android:id="@+id/spinner6"
+            <EditText
+                android:id="@+id/etValue3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:entries="@array/seconds_array"
+                android:text="-1"
                 android:background="#99d9d9d9"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 4"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 5"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 6"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 7"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 8"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 9"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRocket10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Slot 10"
+                android:background="#99d9d9d9"/>
+
+            <EditText
+                android:id="@+id/etValue10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="-1"
+                android:background="#99d9d9d9"/>
+        </LinearLayout>
         <Button
             android:id="@+id/btnGo"
+            android:onClick="onGo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btnGo" />

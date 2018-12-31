@@ -2,6 +2,7 @@ package com.rocketlauncher.mscsdr.rs;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Model.getInstance().currentContext = this;
         initPropertyChangeListeners();
         mTitle = findViewById(R.id.txtTitle);
-        mTitle.setText(R.string.app_name);
+        mTitle.setText("Not connected!");
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
@@ -46,12 +47,13 @@ public class MainActivity extends AppCompatActivity {
         Model.getInstance().titleText.unsubcribeFromValue(pcl);
     }
 
-    public void onSingle(View view) {
+    public void onConnect(View view) {
         if (Model.getInstance().mSerialService != null) {
             Log.i(Model.LOG_TAG, "Resetting mSerialService");
             Model.getInstance().mSerialService.stop();
             Model.getInstance().mSerialService = null;
         }
+
         for (BluetoothDevice d : mBluetoothAdapter.getBondedDevices())
             if (d.getName().equals("Irrelev4nt"))
                 mmDevice = d;
@@ -59,14 +61,15 @@ public class MainActivity extends AppCompatActivity {
         Model.getInstance().mSerialService = new BluetoothSerialService(Model.getInstance().mHandlerBT);
         Model.getInstance().mSerialService.start();           // DAS HIER MUSS
         Model.getInstance().mSerialService.connect(mmDevice); // VOR DAS HIER!!!! SONST IST DER SOCKET ZU
+    }
 
-//        Intent intent = new Intent(MainActivity.this, SingleActivity.class);
-//        startActivity(intent);
+    public void onSingle(View view) {
+        Intent intent = new Intent(MainActivity.this, SingleActivity.class);
+        startActivity(intent);
     }
 
     public void onMulti(View view) {
-        Model.getInstance().send("Hallo".getBytes());
-//        Intent intent = new Intent(MainActivity.this, MultiActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, MultiActivity.class);
+        startActivity(intent);
     }
 }

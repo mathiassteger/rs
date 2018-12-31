@@ -7,7 +7,10 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.rocketlauncher.mscsdr.rs.PropertyChanges.RadioString;
+
+import java.util.HashMap;
 
 /**
  * Created by Mortif3r on 29.12.2018.
@@ -15,7 +18,7 @@ import com.rocketlauncher.mscsdr.rs.PropertyChanges.RadioString;
 
 public class Model {
     private static final Model INSTANCE = new Model();
-
+    public Gson gson = new Gson();
     private static String mConnectedDeviceName = null;
     public BluetoothSerialService mSerialService = null;
     private static boolean mLocalEcho = false;
@@ -37,8 +40,22 @@ public class Model {
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
 
-    private Model(){
+    public static final HashMap<Integer, Integer> pinMapping = new HashMap<Integer, Integer>() { // ROCKET -> PIN
+        {
+            this.put(0, 8);
+            this.put(1, 10);
+            this.put(2, 12);
+            this.put(3, 16);
+            this.put(4, 18);
+            this.put(5, 22);
+            this.put(6, 24);
+            this.put(7, 26);
+            this.put(8, 28);
+            this.put(9, 32);
+        }
+    };
 
+    private Model() {
     }
 
     private byte[] handleEndOfLineChars(int outgoingEoL) {
