@@ -14,38 +14,37 @@ server_socket.listen(1)
 
 def initPins():
   GPIO.setmode(GPIO.BOARD) # Access GPIO pins by pin number not GPIO number
-  GPOI.setup(8, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(10, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(12, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(14, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(16, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(18, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(22, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(24, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(26, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(28, GPIO.OUT) # Set GPIO pin to output
-  GPOI.setup(32, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(8, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(10, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(12, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(16, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(18, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(22, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(24, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(26, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(36, GPIO.OUT) # Set GPIO pin to output
+  GPIO.setup(32, GPIO.OUT) # Set GPIO pin to output
   GPIO.output(8, 1)
   GPIO.output(10, 1)
   GPIO.output(12, 1)
-  GPIO.output(14, 1)
   GPIO.output(16, 1)
   GPIO.output(18, 1)
   GPIO.output(22, 1)
   GPIO.output(24, 1)
   GPIO.output(26, 1)
-  GPIO.output(28, 1)
+  GPIO.output(36, 1)
   GPIO.output(32, 1)
 
 def pin(pinNumber, delay): #Thread to start rocket with pin number (call with "Thread(target=pin, args=($pinNmbr$,$delay$,)).start()")
  time.sleep(delay)
- GPIO.output(pinNumber, 0) # HIGH
+ GPIO.output(pinNumber, 0) # HIGH ROCKET
  time.sleep(1) #sleep for number of seconds the pin should be on
- GPIO.output(pinNumber, 1) # HIGH
+ GPIO.output(pinNumber, 1) # LOW ROCKET
  #TODO: release pin
 
 def worker(q): #Consumer Thread
  while 1:
+  time.sleep(0.1) 	
   print "worker running"
   if(not q.empty()):
    print "Consumer consumed: ", q.get()

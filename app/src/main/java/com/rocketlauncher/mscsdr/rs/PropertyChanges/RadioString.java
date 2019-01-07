@@ -14,6 +14,13 @@ import java.beans.PropertyChangeSupport;
 public class RadioString {
     private String value = "";
 
+    public RadioString() {
+    }
+
+    public RadioString(String value) {
+        this.value = value;
+    }
+
     private final PropertyChangeSupport valuePCS = new PropertyChangeSupport(this);
 
     public synchronized void setValue(String value) {

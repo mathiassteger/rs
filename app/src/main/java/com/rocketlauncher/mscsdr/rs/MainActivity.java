@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Model.getInstance().currentContext = this;
         initPropertyChangeListeners();
         mTitle = findViewById(R.id.txtTitle);
-        mTitle.setText("Not connected!");
+        mTitle.setText(Model.getInstance().titleText.getValue());
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }

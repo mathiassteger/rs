@@ -24,7 +24,7 @@ public class Model {
     private static boolean mLocalEcho = false;
     public volatile Context currentContext = null;
 
-    public final RadioString titleText = new RadioString();
+    public final RadioString titleText = new RadioString("Not connected!");
 
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
@@ -50,7 +50,7 @@ public class Model {
             this.put(5, 22);
             this.put(6, 24);
             this.put(7, 26);
-            this.put(8, 28);
+            this.put(8, 36);
             this.put(9, 32);
         }
     };
